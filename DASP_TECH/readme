@@ -1,0 +1,70 @@
+  <script>
+      // Initialize EmailJS
+      (function () {
+        emailjs.init("mycROjGWRDWy0lQYo"); // Replace with your public key
+      })();
+
+      // Send Email
+      document
+        .getElementById("contactForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          emailjs.sendForm("service_4wjrvmg", "template_a2aih08", this).then(
+            function () {
+              alert("Message sent successfully!");
+            },
+            function (error) {
+              alert("Failed to send message. Try again!");
+              console.log(error);
+            }
+          );
+        });
+    </script>
+
+    // script used for contact form not worked
+     function sendMail() {
+
+let parms = {
+name: document.getElementById("name").value,
+email: document.getElementById("email").value,
+messege: document.getElementById("message").value,
+};
+emailjs
+.send("service_4wjrvmg", "template_okq6651", parms)
+.then(alert("email sent!!!"));
+}
+
+// new
+emailjs.init({
+publicKey: "mycROjGWRDWy0lQYo",
+});
+
+function sendMail(event) {
+event.preventDefault(); // Stop form refresh
+
+const name = document.getElementById("name").value.trim();
+const email = document.getElementById("email").value.trim();
+const message = document.getElementById("message").value.trim();
+
+const params = {
+from_name: name,
+from_email: email,
+message: message,
+};
+
+emailjs
+.send("service_4wjrvmg", "template_7rmpppa", params)
+.then(function () {
+// Show success popup
+document.getElementById("popup").style.display = "flex";
+})
+.catch(function () {
+alert("Failed to send!!!");
+});
+}
+
+// Close popup function
+function closePopup() {
+document.getElementById("popup").style.display = "none";
+}
